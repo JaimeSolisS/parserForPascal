@@ -1625,11 +1625,6 @@ yyreduce:
     { (yyval) = unaryop((yyvsp[(1) - (2)]), (yyvsp[(2) - (2)])); }
     break;
 
-  case 9:
-#line 90 "parse.y"
-    { (yyval) = findid((yyvsp[(1) - (1)])); }
-    break;
-
   case 10:
 #line 91 "parse.y"
     { (yyval) = unaryop((yyvsp[(1) - (2)]), (yyvsp[(2) - (2)])); }
@@ -1777,7 +1772,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 1781 "y.tab.c"
+#line 1776 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2003,23 +1998,23 @@ yyreturn:
 
 #define DEBUG           0             /* set bits here for debugging, 0 = off  */
 #define DB_CONS         1             /* bit to trace cons */
-#define DB_BINOP        2             /* bit to trace binop */
-#define DB_MAKEIF       4             /* bit to trace makeif */
-#define DB_MAKEPROGN    8             /* bit to trace makeprogn */
-#define DB_PARSERES     16            /* bit to trace parseresult */
-#define DB_MAKEPROGRAM  3
-#define DB_MAKEOP       3
-#define DB_MAKEFUNCALL  1
-#define DB_MAKEGOTO     3
-#define DB_MAKELABEL    3
-#define DB_MAKECOPY     3
-#define DB_MAKENUMBER   3
-#define DB_MAKEFOR      1
+#define DB_BINOP        0             /* bit to trace binop */
+#define DB_MAKEIF       0             /* bit to trace makeif */
+#define DB_MAKEPROGN    0             /* bit to trace makeprogn */
+#define DB_PARSERES     0            /* bit to trace parseresult */
+#define DB_MAKEPROGRAM  0
+#define DB_MAKEOP       0
+#define DB_MAKEFUNCALL  0
+#define DB_MAKEGOTO     0
+#define DB_MAKELABEL    0
+#define DB_MAKECOPY     0
+#define DB_MAKENUMBER   0
+#define DB_MAKEFOR      0
 
-#define DB_UNOP         1
-#define DB_FINDID       1  
+#define DB_UNOP         0
+#define DB_FINDID       0  
 #define DB_INSTCONST    1  
-#define DB_MAKEREPEAT   1
+#define DB_MAKEREPEAT   0
 
  int labelnumber = 0;  /* sequential counter for internal label numbers */
 
@@ -2055,7 +2050,11 @@ int isReal(TOKEN tok) {
 //NEW
 /* makefloat forces the item tok to be floating, by floating a constant
    or by inserting a FLOATOP operator */
+   #define NUM_COERCE_IMPLICIT	1
+   
 TOKEN makefloat(TOKEN tok){
+
+    TOKEN out; 
    if(tok->tokentype == NUMBERTOK) {
     tok->tokentype = REAL;
     tok->realval = (double) tok->intval;
@@ -2188,15 +2187,19 @@ void instvars(TOKEN idlist, TOKEN typetok) {
 TOKEN findid(TOKEN tok) { 
    SYMBOL sym, typ;
     sym = searchst(tok->stringval);
+    
     tok->symentry = sym;
+    
     
     if (sym->kind == CONSTSYM) {
       if (sym->basicdt == REAL) {
+        printf("hit constant\n");
         tok->tokentype = NUMBERTOK;
         tok->tokentype = REAL;
         tok->realval = sym->constval.realnum;
       }
       else if (sym->basicdt == INTEGER) {
+        printf("hit constant\n");
         tok->tokentype = NUMBERTOK;
         tok->tokentype = INTEGER;
         tok->intval = sym->constval.intnum;
@@ -2386,16 +2389,17 @@ void  instconst(TOKEN idtok, TOKEN consttok){
   SYMBOL sym;
   sym = insertsym(idtok->stringval);
   sym->kind = CONSTSYM;
-  sym->basicdt = consttok->symtype;
+  sym->basicdt = consttok->basicdt;
   if(sym->basicdt == REAL) {
+    printf("Entra a los reales\n");
       sym->constval.realnum = consttok->realval;
-      sym->size = basicsizes[REAL];
+     // sym->size = basicsizes[REAL];
   }
 
   if(sym->basicdt == INTEGER) 
-  {
+  {printf("Entra a los Enteros\n");
       sym->constval.intnum = consttok->intval;
-      sym->size = basicsizes[INTEGER];
+     // sym->size = basicsizes[INTEGER];
       
   }
   if (DEBUG & DB_INSTCONST) {
