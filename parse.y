@@ -13,12 +13,10 @@ UTEID: js96986*/
 ; it under the terms of the GNU General Public License as published by
 ; the Free Software Foundation; either version 2 of the License, or
 ; (at your option) any later version.
-
 ; This program is distributed in the hope that it will be useful,
 ; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ; GNU General Public License for more details.
-
 ; You should have received a copy of the GNU General Public License
 ; along with this program; if not, see <http://www.gnu.org/licenses/>.
   */
@@ -31,15 +29,12 @@ UTEID: js96986*/
                      pars1y                   execute the parser
                      i:=j .
                      ^D                       control-D to end input
-
                      pars1y                   execute the parser
                      begin i:=j; if i+j then x:=a+b*c else x:=a*b+c; k:=i end.
                      ^D
-
                      pars1y                   execute the parser
                      if x+y then if y+z then i:=j else k:=2.
                      ^D
-
            You may copy pars1.y to be parse.y and extend it for your
            assignment.  Then use   make parser   as above.
         */
@@ -186,7 +181,6 @@ program    : PROGRAM IDENTIFIER LPAREN idlist RPAREN SEMICOLON cblock DOT { pars
 
 /* You should add your own debugging flags below, and add debugging
    printouts to your programs.
-
    You will want to change DEBUG to turn off printouts once things
    are working.
   */
@@ -230,28 +224,26 @@ TOKEN cons(TOKEN item, TOKEN list)           // add item to front of list
 
 //NEW
   int isInteger(TOKEN tok) {
-  if(tok->tokentype == INTEGER)
+  if(tok->basicdt == INTEGER)
     return 1;
   else 
     return 0;
 }
 //NEW
 int isReal(TOKEN tok) {
-  if(tok->tokentype == REAL)
+  if(tok->basicdt == REAL)
     return 1;
   else 
     return 0;
 }
 //NEW
 /* makefloat forces the item tok to be floating, by floating a constant
-   or by inserting a FLOATOP operator */
-   #define NUM_COERCE_IMPLICIT	1
-   
+   or by inserting a FLOATOP operator */   
 TOKEN makefloat(TOKEN tok){
 
     TOKEN out; 
    if(tok->tokentype == NUMBERTOK) {
-    tok->tokentype = REAL;
+    tok->basicdt = REAL;
     tok->realval = (double) tok->intval;
     return tok;
   } else {
@@ -274,18 +266,18 @@ TOKEN binop(TOKEN op, TOKEN lhs, TOKEN rhs)        /* reduce binary operator */
     };
 
     if (isReal(lhs) && isReal(rhs)) {
-      op->tokentype = REAL;     
+      op->basicdt = REAL;     
     } else if (isReal(lhs) && isInteger(rhs)) {
-      op->tokentype = REAL;
+      op->basicdt = REAL;
       TOKEN ftok = makefloat(rhs);
       lhs->link = ftok;
     } else if (isInteger(lhs) && isReal(rhs)) {
       if (op->whichval == ASSIGNOP) {
-        op->tokentype = INTEGER;
+        op->basicdt = INTEGER;
         TOKEN fixtok = makefix(rhs);
         lhs->link = fixtok;
       } else {
-        op->tokentype = REAL;
+        op->basicdt = REAL;
         TOKEN ftok = makefloat(lhs);
         ftok->link = rhs;
       }
@@ -388,20 +380,17 @@ TOKEN findid(TOKEN tok) {
     
     if (sym->kind == CONSTSYM) {
       if (sym->basicdt == REAL) {
-        printf("hit constant\n");
         tok->tokentype = NUMBERTOK;
-        tok->tokentype = REAL;
+        tok->basicdt = REAL;
         tok->realval = sym->constval.realnum;
       }
       else if (sym->basicdt == INTEGER) {
-        printf("hit constant\n");
         tok->tokentype = NUMBERTOK;
-        tok->tokentype = INTEGER;
+        tok->basicdt = INTEGER;
         tok->intval = sym->constval.intnum;
       }
 
       if (DEBUG & DB_FINDID) { 
-        printf("hit constant\n");
         dbugprinttok(sym);
         debugprinttok(tok);
       };
@@ -412,10 +401,9 @@ TOKEN findid(TOKEN tok) {
     tok->symtype = typ;
     if ( typ->kind == BASICTYPE ||
          typ->kind == POINTERSYM)
-        tok->tokentype = typ->basicdt;
+        tok->basicdt = typ->basicdt;
 
     if (DEBUG & DB_FINDID) { 
-      printf("hit identifier\n");
       dbugprinttok(sym);
       debugprinttok(tok);
     };
@@ -449,7 +437,7 @@ TOKEN makeop(int opnum){
    or by inserting a FIXOP operator */
 TOKEN makefix(TOKEN tok){
   if(tok->tokentype == NUMBERTOK) {
-    tok->tokentype = INTEGER;
+    tok->basicdt = INTEGER;
     tok->intval = (int) tok->realval;
     return tok;
   } else { 
@@ -586,17 +574,14 @@ void  instconst(TOKEN idtok, TOKEN consttok){
   sym->kind = CONSTSYM;
   sym->basicdt = consttok->basicdt;
   if(sym->basicdt == REAL) {
-    printf("Entra a los reales\n");
       sym->constval.realnum = consttok->realval;
      // sym->size = basicsizes[REAL];
   }
 
   if(sym->basicdt == INTEGER) 
-  {printf("Entra a los Enteros\n");
       sym->constval.intnum = consttok->intval;
      // sym->size = basicsizes[INTEGER];
-      
-  }
+
   if (DEBUG & DB_INSTCONST) {
     printf("install const\n");
     dbugprinttok(sym);
@@ -652,6 +637,4 @@ main()
     if (DEBUG & DB_PARSERES) 
       dbugprinttok(parseresult);
     ppexpr(parseresult);           /* Pretty-print the result tree */
-     /* uncomment following to call code generator. */
-      //gencode(parseresult, blockoffs[blocknumber], labelnumber);
   }

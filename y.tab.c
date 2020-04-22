@@ -208,12 +208,10 @@ UTEID: js96986*/
 ; it under the terms of the GNU General Public License as published by
 ; the Free Software Foundation; either version 2 of the License, or
 ; (at your option) any later version.
-
 ; This program is distributed in the hope that it will be useful,
 ; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ; GNU General Public License for more details.
-
 ; You should have received a copy of the GNU General Public License
 ; along with this program; if not, see <http://www.gnu.org/licenses/>.
   */
@@ -226,15 +224,12 @@ UTEID: js96986*/
                      pars1y                   execute the parser
                      i:=j .
                      ^D                       control-D to end input
-
                      pars1y                   execute the parser
                      begin i:=j; if i+j then x:=a+b*c else x:=a*b+c; k:=i end.
                      ^D
-
                      pars1y                   execute the parser
                      if x+y then if y+z then i:=j else k:=2.
                      ^D
-
            You may copy pars1.y to be parse.y and extend it for your
            assignment.  Then use   make parser   as above.
         */
@@ -289,7 +284,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 293 "y.tab.c"
+#line 288 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -604,14 +599,14 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    80,    80,    82,    83,    84,    86,    87,    89,    90,
-      91,    92,    93,    95,    96,    98,   100,   101,   103,   104,
-     106,   107,   109,   110,   112,   113,   115,   116,   118,   119,
-     121,   123,   125,   127,   129,   130,   131,   132,   133,   134,
-     136,   138,   139,   141,   142,   144,   145,   147,   149,   151,
-     152,   153,   155,   156,   157,   158,   159,   160,   161,   163,
-     164,   165,   166,   167,   169,   170,   171,   173,   174,   176,
-     177,   179,   180,   181,   182,   183
+       0,    75,    75,    77,    78,    79,    81,    82,    84,    85,
+      86,    87,    88,    90,    91,    93,    95,    96,    98,    99,
+     101,   102,   104,   105,   107,   108,   110,   111,   113,   114,
+     116,   118,   120,   122,   124,   125,   126,   127,   128,   129,
+     131,   133,   134,   136,   137,   139,   140,   142,   144,   146,
+     147,   148,   150,   151,   152,   153,   154,   155,   156,   158,
+     159,   160,   161,   162,   164,   165,   166,   168,   169,   171,
+     172,   174,   175,   176,   177,   178
 };
 #endif
 
@@ -1616,163 +1611,163 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 80 "parse.y"
+#line 75 "parse.y"
     { parseresult = makeprogram((yyvsp[(2) - (8)]), (yyvsp[(4) - (8)]), (yyvsp[(7) - (8)])); }
     break;
 
   case 8:
-#line 89 "parse.y"
+#line 84 "parse.y"
     { (yyval) = unaryop((yyvsp[(1) - (2)]), (yyvsp[(2) - (2)])); }
     break;
 
   case 10:
-#line 91 "parse.y"
+#line 86 "parse.y"
     { (yyval) = unaryop((yyvsp[(1) - (2)]), (yyvsp[(2) - (2)])); }
     break;
 
   case 13:
-#line 95 "parse.y"
+#line 90 "parse.y"
     { (yyval) = cons((yyvsp[(1) - (3)]), (yyvsp[(3) - (3)])); }
     break;
 
   case 14:
-#line 96 "parse.y"
+#line 91 "parse.y"
     { (yyval) = cons((yyvsp[(1) - (1)]), NULL); }
     break;
 
   case 15:
-#line 98 "parse.y"
+#line 93 "parse.y"
     { instconst((yyvsp[(1) - (3)]), (yyvsp[(3) - (3)])); }
     break;
 
   case 20:
-#line 106 "parse.y"
+#line 101 "parse.y"
     { (yyval) = cons((yyvsp[(1) - (3)]), (yyvsp[(3) - (3)])); }
     break;
 
   case 22:
-#line 109 "parse.y"
+#line 104 "parse.y"
     { (yyval) = (yyvsp[(3) - (3)]); }
     break;
 
   case 24:
-#line 112 "parse.y"
+#line 107 "parse.y"
     { (yyval) = (yyvsp[(3) - (3)]); }
     break;
 
   case 26:
-#line 115 "parse.y"
+#line 110 "parse.y"
     { (yyval) = (yyvsp[(3) - (3)]); }
     break;
 
   case 30:
-#line 121 "parse.y"
+#line 116 "parse.y"
     { instvars((yyvsp[(1) - (3)]), (yyvsp[(3) - (3)])); }
     break;
 
   case 32:
-#line 125 "parse.y"
+#line 120 "parse.y"
     { (yyval) = findtype((yyvsp[(1) - (1)])); }
     break;
 
   case 33:
-#line 127 "parse.y"
+#line 122 "parse.y"
     { (yyval) = makeprogn((yyvsp[(1) - (3)]),cons((yyvsp[(2) - (3)]), (yyvsp[(3) - (3)]))); }
     break;
 
   case 34:
-#line 129 "parse.y"
+#line 124 "parse.y"
     { (yyval) = makeprogn((yyvsp[(1) - (3)]),cons((yyvsp[(2) - (3)]), (yyvsp[(3) - (3)]))); }
     break;
 
   case 35:
-#line 130 "parse.y"
+#line 125 "parse.y"
     { (yyval) = makeif((yyvsp[(1) - (5)]), (yyvsp[(2) - (5)]), (yyvsp[(4) - (5)]), (yyvsp[(5) - (5)])); }
     break;
 
   case 38:
-#line 133 "parse.y"
+#line 128 "parse.y"
     { (yyval) = makefor(1, (yyvsp[(1) - (6)]), (yyvsp[(2) - (6)]), (yyvsp[(3) - (6)]), (yyvsp[(4) - (6)]), (yyvsp[(5) - (6)]), (yyvsp[(6) - (6)])); }
     break;
 
   case 39:
-#line 134 "parse.y"
+#line 129 "parse.y"
     { (yyval) = makerepeat((yyvsp[(1) - (4)]), (yyvsp[(2) - (4)]), (yyvsp[(3) - (4)]), (yyvsp[(4) - (4)])); }
     break;
 
   case 40:
-#line 136 "parse.y"
+#line 131 "parse.y"
     { (yyval) = makefuncall((yyvsp[(2) - (4)]), (yyvsp[(1) - (4)]), (yyvsp[(3) - (4)])); }
     break;
 
   case 41:
-#line 138 "parse.y"
+#line 133 "parse.y"
     { (yyval) = cons((yyvsp[(1) - (3)]), (yyvsp[(3) - (3)])); }
     break;
 
   case 43:
-#line 141 "parse.y"
+#line 136 "parse.y"
     { (yyval) = cons((yyvsp[(2) - (3)]), (yyvsp[(3) - (3)])); }
     break;
 
   case 44:
-#line 142 "parse.y"
+#line 137 "parse.y"
     { (yyval) = NULL; }
     break;
 
   case 45:
-#line 144 "parse.y"
+#line 139 "parse.y"
     { (yyval) = (yyvsp[(2) - (2)]); }
     break;
 
   case 46:
-#line 145 "parse.y"
+#line 140 "parse.y"
     { (yyval) = NULL; }
     break;
 
   case 47:
-#line 147 "parse.y"
+#line 142 "parse.y"
     { (yyval) = binop((yyvsp[(2) - (3)]), (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)])); }
     break;
 
   case 48:
-#line 149 "parse.y"
+#line 144 "parse.y"
     { (yyval) = findid((yyvsp[(1) - (1)])); }
     break;
 
   case 64:
-#line 169 "parse.y"
+#line 164 "parse.y"
     { (yyval) = unaryop((yyvsp[(1) - (2)]), (yyvsp[(2) - (2)])); }
     break;
 
   case 66:
-#line 171 "parse.y"
+#line 166 "parse.y"
     { (yyval) = binop((yyvsp[(2) - (3)]), (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)])); }
     break;
 
   case 67:
-#line 173 "parse.y"
+#line 168 "parse.y"
     { (yyval) = binop((yyvsp[(2) - (3)]), (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)])); }
     break;
 
   case 69:
-#line 176 "parse.y"
+#line 171 "parse.y"
     { (yyval) = binop((yyvsp[(2) - (3)]), (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)])); }
     break;
 
   case 73:
-#line 181 "parse.y"
+#line 176 "parse.y"
     { (yyval) = (yyvsp[(2) - (3)]); }
     break;
 
   case 75:
-#line 183 "parse.y"
+#line 178 "parse.y"
     { (yyval) = unaryop((yyvsp[(1) - (2)]), (yyvsp[(2) - (2)])); }
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1776 "y.tab.c"
+#line 1771 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1986,12 +1981,11 @@ yyreturn:
 }
 
 
-#line 185 "parse.y"
+#line 180 "parse.y"
 
 
 /* You should add your own debugging flags below, and add debugging
    printouts to your programs.
-
    You will want to change DEBUG to turn off printouts once things
    are working.
   */
@@ -2035,28 +2029,26 @@ TOKEN cons(TOKEN item, TOKEN list)           // add item to front of list
 
 //NEW
   int isInteger(TOKEN tok) {
-  if(tok->tokentype == INTEGER)
+  if(tok->basicdt == INTEGER)
     return 1;
   else 
     return 0;
 }
 //NEW
 int isReal(TOKEN tok) {
-  if(tok->tokentype == REAL)
+  if(tok->basicdt == REAL)
     return 1;
   else 
     return 0;
 }
 //NEW
 /* makefloat forces the item tok to be floating, by floating a constant
-   or by inserting a FLOATOP operator */
-   #define NUM_COERCE_IMPLICIT	1
-   
+   or by inserting a FLOATOP operator */   
 TOKEN makefloat(TOKEN tok){
 
     TOKEN out; 
    if(tok->tokentype == NUMBERTOK) {
-    tok->tokentype = REAL;
+    tok->basicdt = REAL;
     tok->realval = (double) tok->intval;
     return tok;
   } else {
@@ -2079,18 +2071,18 @@ TOKEN binop(TOKEN op, TOKEN lhs, TOKEN rhs)        /* reduce binary operator */
     };
 
     if (isReal(lhs) && isReal(rhs)) {
-      op->tokentype = REAL;     
+      op->basicdt = REAL;     
     } else if (isReal(lhs) && isInteger(rhs)) {
-      op->tokentype = REAL;
+      op->basicdt = REAL;
       TOKEN ftok = makefloat(rhs);
       lhs->link = ftok;
     } else if (isInteger(lhs) && isReal(rhs)) {
       if (op->whichval == ASSIGNOP) {
-        op->tokentype = INTEGER;
+        op->basicdt = INTEGER;
         TOKEN fixtok = makefix(rhs);
         lhs->link = fixtok;
       } else {
-        op->tokentype = REAL;
+        op->basicdt = REAL;
         TOKEN ftok = makefloat(lhs);
         ftok->link = rhs;
       }
@@ -2193,20 +2185,17 @@ TOKEN findid(TOKEN tok) {
     
     if (sym->kind == CONSTSYM) {
       if (sym->basicdt == REAL) {
-        printf("hit constant\n");
         tok->tokentype = NUMBERTOK;
-        tok->tokentype = REAL;
+        tok->basicdt = REAL;
         tok->realval = sym->constval.realnum;
       }
       else if (sym->basicdt == INTEGER) {
-        printf("hit constant\n");
         tok->tokentype = NUMBERTOK;
-        tok->tokentype = INTEGER;
+        tok->basicdt = INTEGER;
         tok->intval = sym->constval.intnum;
       }
 
       if (DEBUG & DB_FINDID) { 
-        printf("hit constant\n");
         dbugprinttok(sym);
         debugprinttok(tok);
       };
@@ -2217,10 +2206,9 @@ TOKEN findid(TOKEN tok) {
     tok->symtype = typ;
     if ( typ->kind == BASICTYPE ||
          typ->kind == POINTERSYM)
-        tok->tokentype = typ->basicdt;
+        tok->basicdt = typ->basicdt;
 
     if (DEBUG & DB_FINDID) { 
-      printf("hit identifier\n");
       dbugprinttok(sym);
       debugprinttok(tok);
     };
@@ -2254,7 +2242,7 @@ TOKEN makeop(int opnum){
    or by inserting a FIXOP operator */
 TOKEN makefix(TOKEN tok){
   if(tok->tokentype == NUMBERTOK) {
-    tok->tokentype = INTEGER;
+    tok->basicdt = INTEGER;
     tok->intval = (int) tok->realval;
     return tok;
   } else { 
@@ -2391,17 +2379,14 @@ void  instconst(TOKEN idtok, TOKEN consttok){
   sym->kind = CONSTSYM;
   sym->basicdt = consttok->basicdt;
   if(sym->basicdt == REAL) {
-    printf("Entra a los reales\n");
       sym->constval.realnum = consttok->realval;
      // sym->size = basicsizes[REAL];
   }
 
   if(sym->basicdt == INTEGER) 
-  {printf("Entra a los Enteros\n");
       sym->constval.intnum = consttok->intval;
      // sym->size = basicsizes[INTEGER];
-      
-  }
+
   if (DEBUG & DB_INSTCONST) {
     printf("install const\n");
     dbugprinttok(sym);
