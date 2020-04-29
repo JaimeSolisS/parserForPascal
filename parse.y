@@ -151,6 +151,15 @@ TOKEN parseresult;
                     ; 
   assignment        :  variable ASSIGN expression   { $$ = binop($2, $1, $3); }
                     ;
+
+
+
+
+
+
+
+
+
 %%
 
 /* You should add your own debugging flags below, and add debugging
@@ -178,9 +187,8 @@ TOKEN parseresult;
 #define DB_FINDID       0  
 #define DB_INSTCONST    1  
 #define DB_MAKEREPEAT   0
-#define DB_MAKEINTC    0
 
-int labelnumber = 0;  /* sequential counter for internal label numbers */
+ int labelnumber = 0;  /* sequential counter for internal label numbers */
 
    /*  Note: you should add to the above values and insert debugging
        printouts in your routines similar to those that are shown here.     */
@@ -230,11 +238,8 @@ TOKEN makefloat(TOKEN tok){
 //NEW
 /* binop links a binary operator op to two operands, lhs and rhs. */
 TOKEN binop(TOKEN op, TOKEN lhs, TOKEN rhs) {       /* reduce binary operator */
-
-if (rhs->whichval == (NIL - RESERVED_BIAS)) {
-      rhs = makeintc(0);
-    }
-op->operands = lhs;          /* link operands to operator       */
+    
+    op->operands = lhs;          /* link operands to operator       */
     lhs->link = rhs;             /* link second operand to first    */
     rhs->link = NULL;            /* terminate operand list          */
     if (DEBUG & DB_BINOP){ 
@@ -243,40 +248,28 @@ op->operands = lhs;          /* link operands to operator       */
       dbugprinttok(lhs);
       dbugprinttok(rhs);
     };
-
-    if (isReal(lhs) && isReal(rhs)) {
-      op->basicdt = REAL;     
-    } else if (isReal(lhs) && isInteger(rhs)) {
+    if (isReal(lhs) && isInteger(rhs)){
+        //if multiplying
       op->basicdt = REAL;
       TOKEN ftok = makefloat(rhs);
       lhs->link = ftok;
-    } else if (isInteger(lhs) && isReal(rhs)) {
-      if (op->whichval == ASSIGNOP) {
-        op->basicdt = INTEGER;
-        TOKEN fixtok = makefix(rhs);
-        lhs->link = fixtok;
-      } else {
-        op->basicdt = REAL;
+    } else if (isInteger(lhs) && isReal(rhs)){
+          //if multiplying 
+          if (op->whichval==TIMESOP) {
+            op->basicdt = REAL;
         TOKEN ftok = makefloat(lhs);
         ftok->link = rhs;
-      }
-    } 
-
+        } //assign int(lhs) is an int
+        else if (op->whichval == ASSIGNOP){
+            op->basicdt = INTEGER;
+        } 
+    } else if(isReal(lhs) && isReal(rhs) ){
+        op->basicdt = REAL;   
+    } else if (lhs->whichval == FUNCALLOP){
+         op->basicdt = REAL; 
+    }
     return op;
-}
-//NEW
-/* makeintc makes a new token with num as its value */
-TOKEN makeintc(int number) {
-  TOKEN tok = talloc();
-  tok->tokentype = NUMBERTOK;
-  tok->basicdt = INTEGER;
-  tok->intval = number;
-  if (DEBUG & DB_MAKEINTC) {
-      printf("makeintc\n");
-      dbugprinttok(tok);
   }
-  return tok;
-}
 //NEW
 /* unaryop links a unary operator op to one operand, lhs */
 TOKEN unaryop(TOKEN op, TOKEN lhs) {
@@ -489,7 +482,7 @@ TOKEN makelabel() {
   TOKEN tok = talloc();
   tok->tokentype = OPERATOR;
   tok->whichval = LABELOP;
-  tok->operands = makeintc(labelnumber++);
+  tok->operands = makenumber(labelnumber++);
   if (DEBUG & DB_MAKELABEL) {
       printf("makelabel\n");
       dbugprinttok(tok);
