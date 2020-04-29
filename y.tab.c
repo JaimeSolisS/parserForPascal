@@ -1980,7 +1980,7 @@ yyreturn:
 }
 
 
-#line 163 "parse.y"
+#line 154 "parse.y"
 
 
 /* You should add your own debugging flags below, and add debugging
@@ -2008,8 +2008,9 @@ yyreturn:
 #define DB_FINDID       0  
 #define DB_INSTCONST    1  
 #define DB_MAKEREPEAT   0
+#define DB_MAKEINTC    0
 
- int labelnumber = 0;  /* sequential counter for internal label numbers */
+int labelnumber = 0;  /* sequential counter for internal label numbers */
 
    /*  Note: you should add to the above values and insert debugging
        printouts in your routines similar to those that are shown here.     */
@@ -2058,8 +2059,12 @@ TOKEN makefloat(TOKEN tok){
 }
 //NEW
 /* binop links a binary operator op to two operands, lhs and rhs. */
-TOKEN binop(TOKEN op, TOKEN lhs, TOKEN rhs)        /* reduce binary operator */
-{ op->operands = lhs;          /* link operands to operator       */
+TOKEN binop(TOKEN op, TOKEN lhs, TOKEN rhs) {       /* reduce binary operator */
+
+if (rhs->whichval == (NIL - RESERVED_BIAS)) {
+      rhs = makeintc(0);
+    }
+op->operands = lhs;          /* link operands to operator       */
     lhs->link = rhs;             /* link second operand to first    */
     rhs->link = NULL;            /* terminate operand list          */
     if (DEBUG & DB_BINOP){ 
@@ -2088,6 +2093,19 @@ TOKEN binop(TOKEN op, TOKEN lhs, TOKEN rhs)        /* reduce binary operator */
     } 
 
     return op;
+}
+//NEW
+/* makeintc makes a new token with num as its value */
+TOKEN makeintc(int number) {
+  TOKEN tok = talloc();
+  tok->tokentype = NUMBERTOK;
+  tok->basicdt = INTEGER;
+  tok->intval = number;
+  if (DEBUG & DB_MAKEINTC) {
+      printf("makeintc\n");
+      dbugprinttok(tok);
+  }
+  return tok;
 }
 //NEW
 /* unaryop links a unary operator op to one operand, lhs */
@@ -2301,7 +2319,7 @@ TOKEN makelabel() {
   TOKEN tok = talloc();
   tok->tokentype = OPERATOR;
   tok->whichval = LABELOP;
-  tok->operands = makenumber(labelnumber++);
+  tok->operands = makeintc(labelnumber++);
   if (DEBUG & DB_MAKELABEL) {
       printf("makelabel\n");
       dbugprinttok(tok);
