@@ -506,7 +506,7 @@ union yyalloc
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  39
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  99
+#define YYNRULES  97
 /* YYNRULES -- Number of states.  */
 #define YYNSTATES  184
 
@@ -568,7 +568,7 @@ static const yytype_uint16 yyprhs[] =
      169,   171,   175,   177,   182,   184,   188,   192,   195,   199,
      201,   205,   209,   212,   216,   218,   222,   226,   229,   233,
      235,   239,   243,   245,   249,   253,   259,   261,   263,   268,
-     275,   280,   283,   285,   289,   291,   294,   295,   299,   302
+     275,   280,   283,   285,   289,   291,   294,   295
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
@@ -603,8 +603,7 @@ static const yytype_int8 yyrhs[] =
       -1,    76,    -1,    60,    82,    37,    97,    -1,    42,   100,
       56,    82,    37,    97,    -1,    53,    98,    58,    82,    -1,
       44,     5,    -1,    96,    -1,    97,    26,    98,    -1,    97,
-      -1,    39,    97,    -1,    -1,    74,    10,    82,    -1,    39,
-      97,    -1,    -1
+      -1,    39,    97,    -1,    -1,    74,    10,    82,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
@@ -619,7 +618,7 @@ static const yytype_uint8 yyrline[] =
      130,   132,   133,   135,   136,   138,   140,   140,   142,   143,
      145,   147,   147,   149,   150,   152,   154,   154,   156,   157,
      159,   162,   163,   165,   167,   168,   169,   170,   171,   172,
-     173,   174,   175,   177,   177,   179,   179,   181,   189,   190
+     173,   174,   175,   177,   177,   179,   179,   181
 };
 #endif
 
@@ -673,7 +672,7 @@ static const yytype_uint8 yyr1[] =
       82,    83,    83,    84,    84,    85,    86,    86,    87,    87,
       88,    89,    89,    90,    90,    91,    92,    92,    93,    93,
       94,    95,    95,    96,    97,    97,    97,    97,    97,    97,
-      97,    97,    97,    98,    98,    99,    99,   100,    99,    99
+      97,    97,    97,    98,    98,    99,    99,   100
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
@@ -688,7 +687,7 @@ static const yytype_uint8 yyr2[] =
        1,     3,     1,     4,     1,     3,     3,     2,     3,     1,
        3,     3,     2,     3,     1,     3,     3,     2,     3,     1,
        3,     3,     1,     3,     3,     5,     1,     1,     4,     6,
-       4,     2,     1,     3,     1,     2,     0,     3,     2,     0
+       4,     2,     1,     3,     1,     2,     0,     3
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -1910,19 +1909,9 @@ yyreduce:
     { (yyval) = binop((yyvsp[(2) - (3)]), (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)])); }
     break;
 
-  case 98:
-#line 189 "parse.y"
-    { (yyval) = (yyvsp[(2) - (2)]); }
-    break;
-
-  case 99:
-#line 190 "parse.y"
-    { (yyval) = NULL; }
-    break;
-
 
 /* Line 1267 of yacc.c.  */
-#line 1926 "y.tab.c"
+#line 1915 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2136,7 +2125,7 @@ yyreturn:
 }
 
 
-#line 193 "parse.y"
+#line 189 "parse.y"
 
 
 /* You should add your own debugging flags below, and add debugging
@@ -2146,7 +2135,7 @@ yyreturn:
   */
 
 #define DEBUG           0             /* set bits here for debugging, 0 = off  */
-#define DB_CONS         1             /* bit to trace cons */
+#define DB_CONS         0             /* bit to trace cons */
 #define DB_BINOP        0             /* bit to trace binop */
 #define DB_MAKEIF       0             /* bit to trace makeif */
 #define DB_MAKEPROGN    0             /* bit to trace makeprogn */
@@ -2157,12 +2146,12 @@ yyreturn:
 #define DB_MAKEGOTO     0
 #define DB_MAKELABEL    0
 #define DB_MAKECOPY     0
-#define DB_MAKENUMBER   0
+#define DB_MAKEINTC     0
 #define DB_MAKEFOR      0
 
 #define DB_UNOP         0
 #define DB_FINDID       0  
-#define DB_INSTCONST    1  
+#define DB_INSTCONST    0  
 #define DB_MAKEREPEAT   0
 
 #define DB_NCONC        0
@@ -2170,24 +2159,21 @@ yyreturn:
 #define DB_MAKEAREF     0
 #define DB_MAKEWHILE    0
 #define DB_MAKESUB      0
-#define DB_REDUCEDOT      0
-#define DB_FINDLABEL      0
-#define DB_ARRAYREF      0
+#define DB_REDUCEDOT    0
+#define DB_FINDLABEL    0
+#define DB_ARRAYREF     0
 #define DB_DOLABEL      0
-#define DB_DOGOTO      0
+#define DB_DOGOTO       0
 #define DB_DOPOINT      0
-#define DB_INSTLABEL      0
-#define DB_INSTENUM      0
-#define DB_INSTDOTDOT      0
-#define DB_INSTARRAY      0
-#define DB_INSTFIELD      0
+#define DB_INSTLABEL    0
+#define DB_INSTENUM     0
+#define DB_INSTDOTDOT   0
+#define DB_INSTARRAY    0
+#define DB_INSTFIELD    0
 #define DB_INSTREC      0
-#define DB_INSTPOINT      0
-#define DB_INSTTYPE      0
-
-
-
-
+#define DB_INSTPOINT    0
+#define DB_INSTTYPE     0
+#define DB_FINDTYPE     0
 
  int labelnumber = 0;  /* sequential counter for internal label numbers */
  int labeltable[50];
@@ -2210,8 +2196,6 @@ TOKEN cons(TOKEN item, TOKEN list)           // add item to front of list
 /* makefloat forces the item tok to be floating, by floating a constant
    or by inserting a FLOATOP operator */   
 TOKEN makefloat(TOKEN tok){
-
-    TOKEN out; 
    if(tok->tokentype == NUMBERTOK) {
     tok->basicdt = REAL;
     tok->realval = (double) tok->intval;
@@ -2236,6 +2220,7 @@ int isReal(TOKEN tok) {
   else 
     return 0;
 }
+//CHECK  BINOP IF ERROR
 /* binop links a binary operator op to two operands, lhs and rhs. */
 TOKEN binop(TOKEN op, TOKEN lhs, TOKEN rhs) {       /* reduce binary operator */
     
@@ -2248,7 +2233,7 @@ TOKEN binop(TOKEN op, TOKEN lhs, TOKEN rhs) {       /* reduce binary operator */
       dbugprinttok(lhs);
       dbugprinttok(rhs);
     };
-    if (isReal(lhs) && isInteger(rhs)){
+    if ((lhs->basicdt==REAL) && isInteger(rhs)){
       //if multiplying
       op->basicdt = REAL;
       TOKEN ftok = makefloat(rhs);
@@ -2360,7 +2345,6 @@ TOKEN findid(TOKEN tok) {
   SYMBOL sym, typ;
   sym = searchst(tok->stringval);
   tok->symentry = sym;
-    
     if (sym->kind == CONSTSYM) {
       if (sym->basicdt == REAL) {
         tok->tokentype = NUMBERTOK;
@@ -2382,22 +2366,25 @@ TOKEN findid(TOKEN tok) {
 
     typ = sym->datatype;
     tok->symtype = typ;
-    if ( typ->kind == BASICTYPE ||
-         typ->kind == POINTERSYM)
+    if ( typ->kind == BASICTYPE || typ->kind == POINTERSYM)
         tok->basicdt = typ->basicdt;
 
-    if (DEBUG & DB_FINDID) { 
-      dbugprinttok(sym);
-      debugprinttok(tok);
-    };
     return tok;
   }
 
+//DIFFERENT
 /* findtype looks up a type name in the symbol table, puts the pointer
    to its type into tok->symtype, returns tok. */
 TOKEN findtype(TOKEN tok) {
     SYMBOL sym = searchst(tok->stringval);
+    if (sym->kind == TYPESYM) 
+      sym = sym->datatype;
     tok->symtype = sym;
+    if (DEBUG & DB_FINDTYPE) {
+      printf("fin\n");
+      dbugprinttok(tok);
+    }
+
     return tok;
 }
 
@@ -2431,13 +2418,42 @@ TOKEN makefix(TOKEN tok){
 /* makefuncall makes a FUNCALL operator and links it to the fn and args.
    tok is a (now) unused token that is recycled. */
 TOKEN makefuncall(TOKEN tok, TOKEN fn, TOKEN args) {
-  tok->tokentype = OPERATOR;
-  tok->whichval = FUNCALLOP;
-  tok->operands = fn;
-  fn->link=args;
+if (strcmp(fn->stringval, "new") == 0) {
+    tok = makeop(ASSIGNOP);
+    tok->operands = args;
+
+    SYMBOL typsym = args->symtype;
+    typsym = typsym->datatype;
+
+    TOKEN funcal = talloc();
+    funcal->tokentype = OPERATOR;
+    funcal->whichval = FUNCALLOP;
+    funcal->operands = fn;
+    fn->link = makeintc(typsym->size);
+    args->link = funcal;
+
+  } else if (strcmp(fn->stringval, "writeln") == 0) {
+    if (args->basicdt == REAL) {
+        strcpy(fn->stringval, "writelnf");
+    } else if (args->tokentype == STRINGTOK) {
+        strcpy(fn->stringval, "writeln");
+    } else {
+        strcpy(fn->stringval, "writelni");
+    }
+    tok->tokentype = OPERATOR;
+    tok->whichval = FUNCALLOP;
+    tok->operands = fn;
+    fn->link=args; 
+
+  } else {
+    tok->tokentype = OPERATOR;
+    tok->whichval = FUNCALLOP;
+    tok->operands = fn;
+    fn->link=args;
+  }
   if (DEBUG && DB_MAKEFUNCALL) {
-      printf("makefuncall\n");
-      dbugprinttok(tok);
+         printf("makefuncall\n");
+         dbugprinttok(tok);
   }
   return tok;
 }
@@ -2460,24 +2476,12 @@ TOKEN copytok(TOKEN origtok) {
   return copy;
 }
 
-TOKEN makenumber(int number) {
-  TOKEN tok = talloc();
-  tok->tokentype = NUMBERTOK;
-  tok->basicdt = INTEGER;
-  tok->intval = number;
-  if (DEBUG & DB_MAKENUMBER) {
-      printf("makenumber\n");
-      dbugprinttok(tok);
-  }
-  return tok;
-}
-
 /* makelabel makes a new label, using labelnumber++ */
 TOKEN makelabel() {
   TOKEN tok = talloc();
   tok->tokentype = OPERATOR;
   tok->whichval = LABELOP;
-  tok->operands = makenumber(labelnumber++);
+  tok->operands = makeintc(labelnumber++);
   if (DEBUG & DB_MAKELABEL) {
       printf("makelabel\n");
       dbugprinttok(tok);
@@ -2491,7 +2495,7 @@ TOKEN makegoto(int label){
   TOKEN tok = talloc();
   tok->tokentype = OPERATOR;
   tok->whichval = GOTOOP;
-  tok->operands = makenumber(label);
+  tok->operands = makeintc(label); ///makeintc(num)
   if (DEBUG && DB_MAKEGOTO) {
     printf("makegoto\n");
     dbugprinttok(tok);
@@ -2499,6 +2503,7 @@ TOKEN makegoto(int label){
   return tok;
 }
 
+///PENDING CORRECT
 /* makefor makes structures for a for statement.
    sign is 1 for normal loop, -1 for downto.
    asg is an assignment statement, e.g. (:= i 1)
@@ -2526,7 +2531,7 @@ TOKEN makefor(int sign, TOKEN tok, TOKEN asg, TOKEN tokb, TOKEN endexpr,
   TOKEN assgn = makeop(ASSIGNOP);
   TOKEN increment = makeop(PLUSOP);
 
-  iden3->link=makenumber(1);
+  iden3->link=makeintc(1);
   increment->operands=iden3;
   iden2->link=increment;
   assgn->operands=iden2;
@@ -2552,17 +2557,14 @@ void  instconst(TOKEN idtok, TOKEN consttok){
   sym = insertsym(idtok->stringval);
   sym->kind = CONSTSYM;
   sym->basicdt = consttok->basicdt;
-  if(sym->basicdt == REAL) {
+  if(sym->basicdt == REAL) 
       sym->constval.realnum = consttok->realval;
-     // sym->size = basicsizes[REAL];
-  }
 
   if(sym->basicdt == INTEGER) 
       sym->constval.intnum = consttok->intval;
-     // sym->size = basicsizes[INTEGER];
-
+ 
   if (DEBUG & DB_INSTCONST) {
-    printf("install const\n");
+    printf("instconst\n");
     dbugprinttok(sym);
   }
 }
@@ -2612,8 +2614,6 @@ TOKEN nconc(TOKEN lista, TOKEN listb){
   return temp;
 }
 
-
-
 /* makeintc makes a new integer number token with num as its value */
 TOKEN makeintc(int number) {
   TOKEN tok = talloc();
@@ -2631,22 +2631,29 @@ TOKEN makeintc(int number) {
    off is be an integer constant token
    tok (if not NULL) is a (now) unused token that is recycled. */
 TOKEN makearef(TOKEN var, TOKEN off, TOKEN tok){
-  if (var->whichval == AREFOP && off->basicdt == INTEGER) {
-    
-    TOKEN off1 = var->operands->link;
-    if (off1->whichval == PLUSOP) {
-      int num = off1->operands->intval;  
-      int num2 = off->intval;
-      TOKEN newoff = makeintc(num + num2);
-      newoff->link = off1->operands->link;
-      off1->operands = newoff;
+    if (var->whichval == AREFOP) {
+    TOKEN plusop = makeop(PLUSOP);
+    TOKEN oldoff = var->operands->link;
+    oldoff->link = off;
+    plusop->operands = oldoff;
+    var->operands->link = plusop;
+    var->basicdt = var->symentry->basicdt;
+
+    return var;
+
+    if (DEBUG && DB_MAKEAREF) {
+        printf("makearef couple\n");
+        printf("symentry: %s", var->symentry->namestring);
+        dbugprinttok(var);
     }
-  }
+
+  } 
 
   TOKEN areftok = makeop(AREFOP);
   var->link = off;
   areftok->operands = var;
-  areftok->symentry = var->symentry;   
+  areftok->symentry = var->symentry; 
+  areftok->basicdt = var->symentry->basicdt;  
 
   if (DEBUG && DB_MAKEAREF) {
       printf("makearef\n");
@@ -2679,6 +2686,7 @@ TOKEN makewhile(TOKEN tok, TOKEN expr, TOKEN tokb, TOKEN statement){
   }
   return tok;
 }
+
 
 /* makesubrange makes a SUBRANGE symbol table entry, puts the pointer to it
    into tok, and returns tok. */
@@ -2728,7 +2736,7 @@ TOKEN reducedot(TOKEN var, TOKEN dot, TOKEN field){
  
 }
 
-
+//ORIGINAL CHANGE?
 /* finds label number in label table for user defined labels */
 int findlabelnumber(int label) {
   if (DEBUG & DB_FINDLABEL) {
@@ -2746,6 +2754,7 @@ int findlabelnumber(int label) {
   return -1;
 }
 
+//PENDING CORRECT
 /* arrayref processes an array reference a[i]
    subs is a list of subscript expressions.
    tok and tokb are (now) unused tokens that are recycled. */
@@ -2825,6 +2834,7 @@ TOKEN dolabel(TOKEN labeltok, TOKEN tok, TOKEN statement) {
     return tok;
 }
 
+//PENDING CORRECT
 /* dogoto is the action for a goto statement.
    tok is a (now) unused token that is recycled. */
 TOKEN dogoto(TOKEN tok, TOKEN labeltok) {
@@ -2856,18 +2866,15 @@ TOKEN dopoint(TOKEN var, TOKEN tok) {
   return tok;
 }
 
-
 /* instlabel installs a user label into the label table */
 void  instlabel (TOKEN num) {
   labeltable[labelnumber++] = num->intval;  
-
   if (DEBUG & DB_INSTLABEL) {
-    printf("install label\n");
-    printf("current table\n");
+    printf("instlabel\n");
+    printf("current\n");
     for (int i = 0; i < labelnumber; i ++) {
       printf("label ");
-      printf("%d", i);
-      printf(" : ");
+      printf("%d  :", i);
       printf("%d\n", labeltable[i]);
     }
   }
@@ -2888,7 +2895,7 @@ TOKEN instenum(TOKEN idlist) {
 
   TOKEN tok = makesubrange(idlist, 0, count - 1);
   if (DEBUG & DB_INSTENUM) {
-    printf("install enum\n");
+    printf("instenum\n");
     dbugprinttok(idlist);
   }
 
@@ -2928,12 +2935,10 @@ TOKEN instarray(TOKEN bounds, TOKEN typetok) {
     arraysym->size = (arraysym->lowbound + arraysym->highbound - 1) * (typesym->size);
     typetok->symtype = arraysym;
     if (DEBUG & DB_INSTARRAY) {
-        printf("install array\n");
+        printf("instarray\n");
         dbugprinttok(typetok);
     }
-
   return typetok;
-
 
   } else {
 
@@ -2967,9 +2972,8 @@ TOKEN instfields(TOKEN idlist, TOKEN typetok) {
     temp = temp->link;
   }
 
-
   if (DEBUG & DB_INSTFIELD) {
-      printf("install fields\n");
+      printf("instfields\n");
       dbugprinttok(idlist);
   }
 
@@ -2980,7 +2984,6 @@ TOKEN instfields(TOKEN idlist, TOKEN typetok) {
    argstok has a pointer its type.  rectok is just a trash token to be
    used to return the result in its symtype */
 TOKEN instrec(TOKEN rectok, TOKEN argstok) {
-  //Do storage allocation algorithm
   SYMBOL recsym = symalloc();
   recsym->kind = RECORDSYM;
   int count = 0, next = 0, align;
@@ -3009,8 +3012,7 @@ TOKEN instrec(TOKEN rectok, TOKEN argstok) {
   rectok->symtype = recsym;
 
   if (DEBUG & DB_INSTREC) {
-      printf("install rec\n");
-      printf("total size %d\n", recsym->size);
+      printf("instrect\n");
       dbugprinttok(rectok);
 
   }
@@ -3021,8 +3023,6 @@ TOKEN instrec(TOKEN rectok, TOKEN argstok) {
 TOKEN instpoint(TOKEN tok, TOKEN typename) {
 
   SYMBOL typesym = searchins(typename->stringval);
-
-
   SYMBOL pointsym = symalloc();
   pointsym->datatype = typesym;
   pointsym->kind = POINTERSYM;
